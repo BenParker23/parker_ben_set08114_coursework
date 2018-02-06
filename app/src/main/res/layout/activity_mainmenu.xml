@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/border">
+
+    <Button
+        android:id="@+id/actionScheduleBut"
+        android:layout_width="397dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="320dp"
+        android:text="View Schedule" />
+
+
+    <Button
+        android:id="@+id/requestBut"
+        android:layout_width="397dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:text="Route Plan" />
+
+    <Button
+        android:id="@+id/routePlanBut"
+        android:layout_width="397dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="160dp"
+        android:text="Phone" />
+
+    <Button
+        android:id="@+id/todaysActionsBut"
+        android:layout_width="397dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="240dp"
+        android:text="Customer Info" />
+
+
+    <Button
+        android:id="@+id/custInfoBut"
+        android:layout_width="396dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="80dp"
+        android:text="Email" />
+
+    <TextView
+        android:id="@+id/greetingText"
+        android:layout_width="378dp"
+        android:layout_height="57dp"
+        android:layout_gravity="top"
+        android:layout_marginLeft="5dp"
+        android:text="Good Morning Steve"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="179dp"
+        android:layout_height="43dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="50dp"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="100dp"
+        android:text="Last Synchronised Date : "
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/textClock2"
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="100dp"
+        android:textSize="18sp"
+        android:text="23/07/17 15:03:01"/>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</LinearLayout>
