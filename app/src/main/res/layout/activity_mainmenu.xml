@@ -55,7 +55,7 @@
         android:layout_height="57dp"
         android:layout_gravity="top"
         android:layout_marginLeft="5dp"
-        android:text="Good Morning Steve"
+        android:text="Good Morning Ben"
         android:textSize="36sp"
         android:textStyle="bold" />
 

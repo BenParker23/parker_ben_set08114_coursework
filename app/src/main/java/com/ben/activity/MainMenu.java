@@ -1,13 +1,16 @@
-package com.ben;
+package com.ben.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by ben on 06/02/18.
- */
+import com.ben.R;
 
+/**
+ * @author Ben Parker
+ * @created 6/2/2018
+ * @usage  Main Menu activity showing user all options
+ * after logging into the app
+ */
 public class MainMenu extends AppCompatActivity {
 
     @Override
