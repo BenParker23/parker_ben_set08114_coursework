@@ -25,8 +25,5 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this.getBaseContext(), MainMenu.class);
         startActivity(intent);
     }
-
-
-
 }
 

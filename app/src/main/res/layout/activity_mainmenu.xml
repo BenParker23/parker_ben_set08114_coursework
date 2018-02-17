@@ -14,35 +14,35 @@
         android:layout_height="75dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="320dp"
-        android:text="View Schedule" />
+        android:text="Manage Schedule" />
 
-
-    <Button
-        android:id="@+id/requestBut"
-        android:layout_width="397dp"
-        android:layout_height="75dp"
-        android:layout_gravity="bottom"
-        android:text="Route Plan" />
 
     <Button
         android:id="@+id/routePlanBut"
         android:layout_width="397dp"
         android:layout_height="75dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="160dp"
-        android:text="Phone" />
+        android:text="Generate Route Plan" />
 
     <Button
-        android:id="@+id/todaysActionsBut"
+        android:id="@+id/manageLeadBut"
+        android:layout_width="397dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="160dp"
+        android:text="Manage Leads" />
+
+    <Button
+        android:id="@+id/manageCustomerBut"
         android:layout_width="397dp"
         android:layout_height="75dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="240dp"
-        android:text="Customer Info" />
+        android:text="Manage Customers" />
 
 
     <Button
-        android:id="@+id/custInfoBut"
+        android:id="@+id/emailCustomerBut"
         android:layout_width="396dp"
         android:layout_height="75dp"
         android:layout_gravity="bottom"

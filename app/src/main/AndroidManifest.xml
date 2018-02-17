@@ -28,6 +28,26 @@
             android:name="com.ben.activity.MainMenu"
             android:label="Main Menu">
         </activity>
+        <activity
+            android:name="com.ben.activity.EmailCustomer"
+            android:label="Email Customer">
+        </activity>
+        <activity
+            android:name="com.ben.activity.CustomerList"
+            android:label="Customer List">
+        </activity>
+        <activity
+            android:name="com.ben.activity.LeadList"
+            android:label="Lead List">
+        </activity>
+        <activity
+            android:name="com.ben.activity.TriggerSchedule"
+            android:label="Trigger Schedule">
+        </activity>
+        <activity
+            android:name="com.ben.activity.RoutePlan"
+            android:label="Route Plan">
+        </activity>
     </application>
 
 </manifest>

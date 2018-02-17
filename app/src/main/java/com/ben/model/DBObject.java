@@ -1,11 +1,8 @@
 package com.ben.model;
 
-import android.content.ContentValues;
-
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 
 /**
