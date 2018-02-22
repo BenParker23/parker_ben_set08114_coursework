@@ -6,7 +6,8 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/border">
+        android:background="@drawable/border"
+        android:id="@+id/mainMenuCoorLay">
 
     <Button
         android:id="@+id/actionScheduleBut"
@@ -88,6 +89,40 @@
         android:layout_marginTop="100dp"
         android:textSize="18sp"
         android:text="23/07/17 15:03:01"/>
+
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="400dp"
+            android:layout_marginTop="20dp"
+            />
+
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="810dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="810dp"
+            android:layout_marginTop="330dp"
+            />
+
+        <com.github.mikephil.charting.charts.CandleStickChart
+            android:id="@+id/candleChart"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="400dp"
+            android:layout_marginTop="330dp"
+            />
 
 
     </android.support.design.widget.CoordinatorLayout>
