@@ -1,6 +1,7 @@
 package com.ben.activity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -39,6 +40,8 @@ import java.util.List;
  * after logging into the app
  */
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+
     private void createBarChart(){
         BarChart barChart = (BarChart) findViewById(R.id.barChart);
 
@@ -107,6 +111,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         barChart.invalidate(); // refresh
     }
 
+
     private void createLineChart(){
         LineChart chart = (LineChart) findViewById(R.id.chart);
 
@@ -125,6 +130,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         chart.setData(lineData);
         chart.invalidate(); // refresh
     }
+
 
     private void createPieChart(){
         PieChart chart = (PieChart) findViewById(R.id.pieChart);

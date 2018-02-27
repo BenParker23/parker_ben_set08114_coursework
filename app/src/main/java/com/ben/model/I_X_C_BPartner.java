@@ -1229,8 +1229,6 @@ public interface I_X_C_BPartner {
     public String getValue();
 
     static String tableCreationSQL = "CREATE TABLE C_BPartner ( "
-            + COLUMNNAME_AD_Client_ID + " INTEGER, "
-            + COLUMNNAME_AD_Org_ID + " INTEGER, "
             + COLUMNNAME_C_BPartner_ID + " INTEGER PRIMARY KEY , "
             + COLUMNNAME_C_BP_Group_ID + " INTEGER, "
             + COLUMNNAME_C_PaymentTerm_ID + " INTEGER, "
