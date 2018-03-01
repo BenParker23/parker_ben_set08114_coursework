@@ -31,6 +31,9 @@ import java.util.Set;
 
 public class TriggerSchedule extends AppCompatActivity implements View.OnClickListener {
 
+    /** Testing commit on PC after clone **/
+
+
     private CoordinatorLayout listCoorLay;
     private CoordinatorLayout coorLayDetail;
     private int marginCounter = 200;
