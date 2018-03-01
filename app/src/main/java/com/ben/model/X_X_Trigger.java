@@ -11,6 +11,15 @@ public class X_X_Trigger implements I_X_Trigger{
     private int AD_User_ID;
     private int C_BPartner_ID;
 
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    private String statusName;
     public String getActionPurposeName() {
         return actionPurposeName;
     }

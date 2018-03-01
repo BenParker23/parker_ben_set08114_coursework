@@ -8,6 +8,7 @@ import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.WindowManager;
@@ -17,6 +18,7 @@ import com.ben.R;
 import com.ben.database.DBQuery;
 import com.ben.display.DisplayUtils;
 import com.ben.model.I_X_Action_Purpose;
+import com.ben.model.I_X_C_BPartner;
 import com.ben.model.I_X_Trigger;
 import com.ben.model.X_X_Trigger;
 
@@ -74,7 +76,12 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
 
 
     private void createActionList(){
-        DBQuery query = new DBQuery("SELECT * FROM X_Trigger JOIN X_Action_Purpose ON X_Trigger.X_Action_Purpose_ID = X_Action_Purpose.X_Action_Purpose_ID ");
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT X_Action_Status.Name AS StatusName, bp.name as BPName, X_Trigger.*, X_Action_Purpose.Name FROM X_Trigger ");
+        sb.append("JOIN X_Action_Purpose ON X_Trigger.X_Action_Purpose_ID = X_Action_Purpose.X_Action_Purpose_ID ");
+        sb.append("JOIN C_BPartner bp on X_Trigger.C_BPartner_ID = bp.C_BPartner_ID ");
+        sb.append("JOIN X_Action_Status on X_Trigger.X_Action_Status_ID = X_Action_Status.X_Action_Status_ID ");
+        DBQuery query = new DBQuery(sb.toString());
         Cursor response = query.executeQuery();
         while (response.moveToNext()){
             X_X_Trigger action = new X_X_Trigger();
@@ -82,12 +89,13 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             action.setC_BPartner_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_C_BPartner_ID)));
             action.setSalesRep_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_SalesRep_ID)));
             action.setDescription(response.getString(response.getColumnIndex(I_X_Trigger.COLUMNNAME_Description)));
+            action.setStatusName(response.getString(response.getColumnIndex("StatusName")));
             action.setActionPurposeName(response.getString(response.getColumnIndex(I_X_Action_Purpose.COLUMNNAME_Name)));
             action.setX_Action_Purpose_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_X_Action_Purpose_ID)));
             action.setX_Action_Status_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_X_Action_Status_ID)));
             todaysActions.add(action);
             TextView valueTV = new TextView(this);
-            valueTV.setText(String.valueOf(action.getC_BPartner_ID()));
+            valueTV.setText(response.getString(response.getColumnIndex("BPName")));
             valueTV.setId(action.getX_Trigger_ID());
             valueTV.setLayoutParams(createParams(400, 100, 0));
             valueTV.setOnClickListener(this);
@@ -134,9 +142,12 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
     private void createTriggerDetail(View v){
         for (X_X_Trigger t : todaysActions){
             if (t.getX_Trigger_ID() == v.getId()){
+                Log.v("DescValue", t.getDescription());
                 descValue.setText(t.getDescription());
+                Log.v("purposeValue", t.getActionPurposeName());
                 purposeValue.setText(t.getActionPurposeName());
-                statusValue.setText(String.valueOf(t.getX_Action_Status_ID()));
+                Log.v("statusValue", t.getStatusName());
+                statusValue.setText(t.getStatusName());
             }
         }
 

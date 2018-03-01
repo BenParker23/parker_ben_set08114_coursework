@@ -123,5 +123,5 @@ public interface I_X_Action_Purpose {
                 + COLUMNNAME_TotalSalesValue + " NUMERIC "
                 + " ); ";
 
-
+        public static String tableDeletionSQL = "DROP TABLE IF EXISTS " + Table_Name;
     }
