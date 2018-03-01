@@ -1223,6 +1223,9 @@ public interface I_X_C_BPartner {
 
     public static final String COLUMNNAME_GrossProfit = "GrossProfit";
 
+
+    public static final String COLUMNNAME_Email = "Email";
+
     /**
      * Set Search Key.
      * Search key for the record in the format required - must be unique
@@ -1256,6 +1259,7 @@ public interface I_X_C_BPartner {
             + COLUMNNAME_IsSalesRep + " TEXT, "
             + COLUMNNAME_IsTaxExempt + " TEXT, "
             + COLUMNNAME_TotalOpenBalance + " NUMERIC, "
+            + COLUMNNAME_Email + " TEXT, "
             + COLUMNNAME_Updated + " TEXT, "
             + COLUMNNAME_UpdatedBy + " INTEGER , "
             + COLUMNNAME_TaxID + " INTEGER, "

@@ -818,7 +818,17 @@ public class X_C_BPartner extends DBObject implements I_X_C_BPartner {
     }
 
     private double WebPercent;
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
     private double SalesValue;
+    private String Email;
 
 
     @Override

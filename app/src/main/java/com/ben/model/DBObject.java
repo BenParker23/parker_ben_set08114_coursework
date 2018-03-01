@@ -10,5 +10,12 @@ import java.io.Serializable;
  */
 
 public abstract class DBObject implements I_Saveable, Serializable {
+
+    /**
+     * Used for populating the object variables
+     * with the data in the returned
+     * Base64 encoded JSONObject from the
+     * iDempiere WebService
+     * **/
     public abstract void fromJson(JSONObject responseObject);
 }
