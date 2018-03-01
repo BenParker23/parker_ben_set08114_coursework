@@ -10,6 +10,16 @@ public class X_X_Trigger implements I_X_Trigger{
 
     private int AD_User_ID;
     private int C_BPartner_ID;
+
+    public String getActionPurposeName() {
+        return actionPurposeName;
+    }
+
+    public void setActionPurposeName(String actionPurposeName) {
+        this.actionPurposeName = actionPurposeName;
+    }
+
+    private String actionPurposeName;
     private int SalesRep_ID;
     private int CompletedByUser_ID;
     private int X_Trigger_ID;

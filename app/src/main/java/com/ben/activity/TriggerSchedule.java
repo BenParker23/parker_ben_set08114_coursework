@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ben.R;
 import com.ben.database.DBQuery;
 import com.ben.display.DisplayUtils;
+import com.ben.model.I_X_Action_Purpose;
 import com.ben.model.I_X_Trigger;
 import com.ben.model.X_X_Trigger;
 
@@ -70,7 +71,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
 
 
     private void createActionList(){
-        DBQuery query = new DBQuery("SELECT * FROM X_Trigger ");
+        DBQuery query = new DBQuery("SELECT * FROM X_Trigger JOIN X_Action_Purpose ON X_Trigger.X_Action_Purpose_ID = X_Action_Purpose.X_Action_Purpose_ID ");
         Cursor response = query.executeQuery();
         while (response.moveToNext()){
             X_X_Trigger action = new X_X_Trigger();
@@ -78,6 +79,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             action.setC_BPartner_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_C_BPartner_ID)));
             action.setSalesRep_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_SalesRep_ID)));
             action.setDescription(response.getString(response.getColumnIndex(I_X_Trigger.COLUMNNAME_Description)));
+            action.setActionPurposeName(response.getString(response.getColumnIndex(I_X_Action_Purpose.COLUMNNAME_Name)));
             action.setX_Action_Purpose_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_X_Action_Purpose_ID)));
             action.setX_Action_Status_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_X_Action_Status_ID)));
             todaysActions.add(action);
@@ -130,7 +132,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
         for (X_X_Trigger t : todaysActions){
             if (t.getX_Trigger_ID() == v.getId()){
                 descValue.setText(t.getDescription());
-                purposeValue.setText(String.valueOf(t.getX_Action_Purpose_ID()));
+                purposeValue.setText(t.getActionPurposeName());
                 statusValue.setText(String.valueOf(t.getX_Action_Status_ID()));
             }
         }
