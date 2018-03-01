@@ -791,6 +791,34 @@ public class X_C_BPartner extends DBObject implements I_X_C_BPartner {
     private String name;
     private String name2;
     private int M_PriceList_ID;
+    private double GrossProfit;
+
+    public double getGrossProfit() {
+        return GrossProfit;
+    }
+
+    public void setGrossProfit(double grossProfit) {
+        GrossProfit = grossProfit;
+    }
+
+    public double getWebPercent() {
+        return WebPercent;
+    }
+
+    public void setWebPercent(double webPercent) {
+        WebPercent = webPercent;
+    }
+
+    public double getSalesValue() {
+        return SalesValue;
+    }
+
+    public void setSalesValue(double salesValue) {
+        SalesValue = salesValue;
+    }
+
+    private double WebPercent;
+    private double SalesValue;
 
 
     @Override

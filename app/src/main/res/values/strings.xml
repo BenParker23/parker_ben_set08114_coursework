@@ -13,4 +13,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string-array name="statusTypes">
+        <item></item>
+        <item>Open - No Contact</item>
+        <item>In Progress</item>
+        <item>Closed - Success</item>
+        <item>Closed - Failure</item>
+    </string-array>
 </resources>

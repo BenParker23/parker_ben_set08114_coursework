@@ -5,6 +5,13 @@ package com.ben.model;
  */
 
 public interface I_X_Action_Status {
+
+    public static final int OPEN = 1;
+    public static final int IN_PROGRESS = 2;
+    public static final int CLOSED_SUCCESS = 3;
+    public static final int CLOSED_FAILURE = 4;
+
+
     /**
      * TableName=X_Action_Status
      */

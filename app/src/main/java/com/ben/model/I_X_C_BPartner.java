@@ -783,6 +783,9 @@ public interface I_X_C_BPartner {
      */
     public static final String COLUMNNAME_Name = "Name";
 
+
+    public static final String COLUMNNAME_WebPercent = "WebPercent";
+
     /**
      * Set Name.
      * Alphanumeric identifier of the entity
@@ -1216,6 +1219,10 @@ public interface I_X_C_BPartner {
      */
     public static final String COLUMNNAME_Value = "Value";
 
+    public static final String COLUMNNAME_SalesValue = "SalesValue";
+
+    public static final String COLUMNNAME_GrossProfit = "GrossProfit";
+
     /**
      * Set Search Key.
      * Search key for the record in the format required - must be unique
@@ -1236,6 +1243,9 @@ public interface I_X_C_BPartner {
             + COLUMNNAME_Created + " TEXT, "
             + COLUMNNAME_CreatedBy + " INTEGER, "
             + COLUMNNAME_DeliveryRule + " TEXT, "
+            + COLUMNNAME_WebPercent + " NUMERIC, "
+            + COLUMNNAME_SalesValue + " NUMERIC, "
+            + COLUMNNAME_GrossProfit + " NUMERIC, "
             + COLUMNNAME_DeliveryViaRule + " TEXT, "
             + COLUMNNAME_Description + " TEXT, "
             + COLUMNNAME_InvoiceRule + " TEXT, "

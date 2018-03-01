@@ -63,6 +63,25 @@
             android:orientation="vertical"
             android:id="@+id/coorLayoutDetail">
 
+            <TextView
+                android:id="@+id/tvSales"
+                android:layout_width="219dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginLeft="20dp"
+                android:text="YTD Sales Value"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvSalesValue2"
+                android:layout_width="219dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginLeft="219dp"
+                android:text=""
+                android:textSize="20dp"
+                />
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -73,6 +92,8 @@
                 android:text="Customer Detail"
                 android:textSize="30dp"
                 android:textStyle="bold"/>
+
+
 
             <TextView
                 android:id="@+id/tvAccNo"
@@ -85,6 +106,17 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/tvAccNoValue"
+                android:layout_width="219dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="219dp"
+                android:text=" "
+                android:textSize="20dp"
+                />
+
+
+            <TextView
                 android:id="@+id/tvWebPercentage"
                 android:layout_width="219dp"
                 android:layout_height="30dp"
@@ -95,14 +127,16 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvSalesValue"
+                android:id="@+id/tvWebPercentageValue"
                 android:layout_width="219dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="110dp"
-                android:layout_marginLeft="20dp"
-                android:text="YTD Sales Value"
+                android:layout_marginTop="80dp"
+                android:layout_marginLeft="219dp"
+                android:text=""
                 android:textSize="20dp"
-                android:textStyle="bold"/>
+               />
+
+
 
             <TextView
                 android:id="@+id/tvGrossProfit"
@@ -113,6 +147,16 @@
                 android:text="YTD Gross Profit"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvGrossProfitValue"
+                android:layout_width="219dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="140dp"
+                android:layout_marginLeft="219dp"
+                android:text=""
+                android:textSize="20dp"
+                />
 
 
             <TextView
@@ -165,7 +209,7 @@
                 android:text="Status"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
-            <TextView
+            <Spinner
                 android:id="@+id/tvTrigStatusValue"
                 android:layout_width="300dp"
                 android:layout_height="50dp"

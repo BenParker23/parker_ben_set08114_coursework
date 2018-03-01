@@ -1,12 +1,20 @@
 package com.ben.model;
 
+import android.content.ContentValues;
+import android.util.Log;
+
+import com.ben.database.DBQuery;
+
+import org.json.JSONObject;
+
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
  * Created by ben on 26/02/18.
  */
 
-public class X_X_Trigger implements I_X_Trigger{
+public class X_X_Trigger extends DBObject implements I_X_Trigger{
 
     private int AD_User_ID;
     private int C_BPartner_ID;
@@ -237,5 +245,30 @@ public class X_X_Trigger implements I_X_Trigger{
     }
 
 
+    @Override
+    public long save() {
+        try {
+            ContentValues values = new ContentValues();
+            values.put(I_X_Trigger.COLUMNNAME_C_BPartner_ID, getC_BPartner_ID());
+            values.put(I_X_Trigger.COLUMNNAME_Description, getDescription());
+            values.put(I_X_Trigger.COLUMNNAME_SalesRep_ID, getSalesRep_ID());
+            values.put(I_X_Trigger.COLUMNNAME_CompletedByUser_ID, getCompletedByUser_ID());
+            values.put(I_X_Trigger.COLUMNNAME_CompletedOn, String.valueOf(getCompletedOn()));
+            values.put(I_X_Trigger.COLUMNNAME_Result, getResult());
+            values.put(I_X_Trigger.COLUMNNAME_X_Action_Status_ID, getX_Action_Status_ID());
+            String[]args = new String[1];
+            args[0] = String.valueOf(getX_Trigger_ID());
+            return DBQuery.executeUpdate(I_X_Trigger.Table_Name, values, "X_Trigger_ID = ?", args);
+        }
+        catch (Exception e){
+            Log.v("SaveErrorTrigger", e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
+    @Override
+    public void fromJson(JSONObject responseObject) {
+
+    }
 }
