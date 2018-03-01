@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\BenPa\Documents\GitHub\parker_ben_set08114_coursework\SalesmanAppCRM.iml" filepath="C:\Users\BenPa\Documents\GitHub\parker_ben_set08114_coursework\SalesmanAppCRM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SalesmanAppCRM.iml" filepath="$PROJECT_DIR$/SalesmanAppCRM.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/parker_ben_set08114_coursework.iml" filepath="$PROJECT_DIR$/parker_ben_set08114_coursework.iml" />
     </modules>
   </component>
 </project>
