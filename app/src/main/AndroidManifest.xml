@@ -29,6 +29,7 @@
             android:label="Main Menu">
         </activity>
         <activity
+            android:theme="@style/Theme.AppCompat.Dialog.Alert"
             android:name="com.ben.activity.EmailCustomer"
             android:label="Email Customer">
         </activity>

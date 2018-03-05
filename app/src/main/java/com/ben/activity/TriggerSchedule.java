@@ -1,5 +1,6 @@
 package com.ben.activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -65,6 +67,9 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
     private TextView purposeValue;
     private Spinner statusValue;
 
+    private Button generateRoute;
+    private Button emailCust;
+
     private EditText resultET;
 
 
@@ -84,6 +89,11 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
         profit = (TextView)findViewById(R.id.tvGrossProfitValue);
         descValue = (TextView)findViewById(R.id.tvDescriptionValue);
         purposeValue = (TextView)findViewById(R.id.tvTrigPurpValue);
+
+        emailCust = (Button)findViewById(R.id.emailCustButTS);
+        emailCust.setOnClickListener(this);
+        generateRoute = (Button)findViewById(R.id.generateRouteButTS);
+        generateRoute.setOnClickListener(this);
 
         createResultTextView();
         createActionList();
@@ -111,6 +121,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
         });
     }
 
+
     private void createResultTextView(){
         resultET = (EditText)findViewById(R.id.etResult);
         resultET.addTextChangedListener(new TextWatcher() {
@@ -132,7 +143,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
 
     private void createActionList(){
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT X_Action_Status.Name AS StatusName, bp.name as BPName, bp.value, bp.webpercent, bp.SalesValue, bp.GrossProfit, X_Trigger.*, X_Action_Purpose.Name FROM X_Trigger ");
+        sb.append("SELECT X_Action_Status.Name AS StatusName, bp.Email, bp.name as BPName, bp.value, bp.webpercent, bp.SalesValue, bp.GrossProfit, X_Trigger.*, X_Action_Purpose.Name FROM X_Trigger ");
         sb.append("JOIN X_Action_Purpose ON X_Trigger.X_Action_Purpose_ID = X_Action_Purpose.X_Action_Purpose_ID ");
         sb.append("JOIN C_BPartner bp on X_Trigger.C_BPartner_ID = bp.C_BPartner_ID ");
         sb.append("JOIN X_Action_Status on X_Trigger.X_Action_Status_ID = X_Action_Status.X_Action_Status_ID ");
@@ -155,6 +166,8 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             bpartner.setValue(response.getString(response.getColumnIndex(I_X_C_BPartner.COLUMNNAME_Value)));
             bpartner.setGrossProfit(response.getDouble(response.getColumnIndex(I_X_C_BPartner.COLUMNNAME_GrossProfit)));
             bpartner.setWebPercent(response.getDouble(response.getColumnIndex(I_X_C_BPartner.COLUMNNAME_WebPercent)));
+            bpartner.setName(response.getString(response.getColumnIndex("BPName")));
+            bpartner.setEmail(response.getString(response.getColumnIndex("Email")));
             todaysActions.put(bpartner, action);
             TextView valueTV = new TextView(this);
             valueTV.setText(response.getString(response.getColumnIndex("BPName")));
@@ -192,7 +205,21 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        createTriggerDetail(view);
+        /** Email Customer Event **/
+        if (view.getId() == emailCust.getId()){
+            X_C_BPartner bp = getCustomerDetails((String)view.getTag());
+            Intent intent = new Intent(this.getBaseContext(), EmailCustomer.class);
+            intent.putExtra("EmailAddress",bp.getEmail());
+            intent.putExtra("EmailBody", "Dear " + bp.getName() + ", ");
+            startActivity(intent);
+        }
+        /** Generate Route Event **/
+        else if (view.getId() == generateRoute.getId()){
+
+        }
+        else {
+            createTriggerDetail(view);
+        }
     }
 
 
@@ -202,22 +229,35 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
      * @param v
      */
     private void createTriggerDetail(View v){
-        for (Map.Entry<X_C_BPartner, X_X_Trigger> t : todaysActions.entrySet()){
-            X_X_Trigger trig = t.getValue();
-            if (trig.getX_Trigger_ID() == v.getId()){
-                descValue.setText(trig.getDescription());
-                purposeValue.setText(trig.getActionPurposeName());
-                resultET.setId(trig.getX_Trigger_ID());
-                resultET.setText(trig.getResult());
-                statusValue.setId(trig.getX_Trigger_ID());
-                acctNo.setText(t.getKey().getValue());
-                webPercent.setText(String.valueOf(t.getKey().getWebPercent()));
-                salesValue.setText(String.valueOf(t.getKey().getSalesValue()));
-                profit.setText(String.valueOf(t.getKey().getGrossProfit()));
-                assignSpinnerDefaultValue(trig);
+
+            for (Map.Entry<X_C_BPartner, X_X_Trigger> t : todaysActions.entrySet()) {
+                X_X_Trigger trig = t.getValue();
+                if (trig.getX_Trigger_ID() == v.getId()) {
+                    descValue.setText(trig.getDescription());
+                    purposeValue.setText(trig.getActionPurposeName());
+                    resultET.setId(trig.getX_Trigger_ID());
+                    resultET.setText(trig.getResult());
+                    statusValue.setId(trig.getX_Trigger_ID());
+                    acctNo.setText(t.getKey().getValue());
+                    webPercent.setText(String.valueOf(t.getKey().getWebPercent()));
+                    salesValue.setText(String.valueOf(t.getKey().getSalesValue()));
+                    profit.setText(String.valueOf(t.getKey().getGrossProfit()));
+                    emailCust.setTag(String.valueOf(trig.getX_Trigger_ID()));
+                    assignSpinnerDefaultValue(trig);
+                }
+            }
+
+
+    }
+
+
+    private X_C_BPartner getCustomerDetails(String id){
+        for (Map.Entry<X_C_BPartner, X_X_Trigger> entry : todaysActions.entrySet() ){
+            if (entry.getValue().getX_Trigger_ID() == Integer.parseInt(id)){
+                return entry.getKey();
             }
         }
-
+        return null;
     }
 
 

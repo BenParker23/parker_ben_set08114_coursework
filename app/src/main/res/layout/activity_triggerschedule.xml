@@ -251,17 +251,23 @@
             </EditText>
 
 
-            <TextView
-                android:id="@+id/tvApplicablePromo"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="430dp"
-                android:layout_marginLeft="20dp"
-                android:text="Applicable Promotions"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
+            <Button
+                android:id="@+id/emailCustButTS"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Email"
+                android:layout_marginLeft="650dp"
+                android:layout_marginTop="550dp"
+                />
 
-
+            <Button
+                android:id="@+id/generateRouteButTS"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Generate Route"
+                android:layout_marginLeft="450dp"
+                android:layout_marginTop="550dp"
+                />
         </android.support.design.widget.CoordinatorLayout>
 
 

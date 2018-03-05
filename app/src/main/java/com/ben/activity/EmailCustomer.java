@@ -37,6 +37,8 @@ public class EmailCustomer extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emailcustomer);
         /** Hide the keyboard on load of activity **/
@@ -58,7 +60,23 @@ public class EmailCustomer extends AppCompatActivity implements View.OnClickList
 
         emailBody = (TextView)findViewById(R.id.emailBodyValue);
         emailSubject = (TextView)findViewById(R.id.tvSubjectValue);
+
+        /** If intent was launched with parameters then load params **/
+        fillParamsIfApplicable();
+
+
     }
+
+
+    private void fillParamsIfApplicable(){
+        if (getIntent().getStringExtra("EmailAddress") != null){
+            emailAddr.setText(getIntent().getStringExtra("EmailAddress"));
+        }
+        if (getIntent().getStringExtra("EmailBody") != null){
+            emailBody.setText(getIntent().getStringExtra("EmailBody"));
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -124,6 +142,7 @@ public class EmailCustomer extends AppCompatActivity implements View.OnClickList
             Toast.makeText(getBaseContext(), "Please enter valid email and add again", Toast.LENGTH_LONG);
             return;
         }
+
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT Email FROM C_BPartner WHERE Email LIKE '% " + emailAddr.getText().toString() + " %' ");
         DBQuery query = new DBQuery(sb.toString());
