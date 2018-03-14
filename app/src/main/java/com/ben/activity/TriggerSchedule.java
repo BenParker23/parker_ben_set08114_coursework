@@ -169,6 +169,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             bpartner.setName(response.getString(response.getColumnIndex("BPName")));
             bpartner.setEmail(response.getString(response.getColumnIndex("Email")));
             todaysActions.put(bpartner, action);
+
             TextView valueTV = new TextView(this);
             valueTV.setText(response.getString(response.getColumnIndex("BPName")));
             valueTV.setId(action.getX_Trigger_ID());

@@ -1,6 +1,7 @@
 package com.ben.model;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import com.ben.database.DBQuery;
 
@@ -18,6 +19,16 @@ public class X_SalesChatter extends DBObject {
     private int X_SalesChatter_Parent_ID = 0;
     private String LinkedImagePath;
     private String bpName;
+
+    public int getReplyCounter() {
+        return replyCounter;
+    }
+
+    public void setReplyCounter(int replyCounter) {
+        this.replyCounter = replyCounter;
+    }
+
+    private int replyCounter = 0;
 
     public String getBpName() {
         return bpName;
@@ -74,7 +85,13 @@ public class X_SalesChatter extends DBObject {
         values.put(I_X_SalesChatter.COLUMNNAME_X_SalesChatter_Parent_ID, getX_SalesChatter_Parent_ID());
         values.put(I_X_SalesChatter.COLUMNNAME_Message, getMessage());
         values.put(I_X_C_BPartner.COLUMNNAME_C_BPartner_ID, getC_BPartner_ID());
-        return DBQuery.insertValues(I_X_SalesChatter.Table_Name, values);
+        DBQuery.insertValues(I_X_SalesChatter.Table_Name, values);
+        Cursor response = DBQuery.executeQuery("SELECT X_SalesChatter_ID FROM X_SalesChatter WHERE Message = '" + getMessage() + " AND C_BPartner_ID = " + getC_BPartner_ID() + "'");
+        while (response.moveToNext()) {
+            int ID = response.getInt(response.getColumnIndex(I_X_SalesChatter.COLUMNNAME_X_SalesChatter_ID));
+            setX_SalesChatter_ID(ID);
+        }
+        return 0;
     }
 
     @Override

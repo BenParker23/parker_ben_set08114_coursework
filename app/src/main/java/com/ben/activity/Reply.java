@@ -24,10 +24,9 @@ import com.ben.model.X_SalesChatter;
  */
 
 public class Reply extends AppCompatActivity implements View.OnClickListener{
-
-    Button galleryImgBut;
     Button cameraImgBut;
     Button submit;
+
     ImageView img;
     TextView userId;
     private EditText message;
@@ -39,10 +38,9 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_reply);
-            galleryImgBut = (Button)findViewById(R.id.galleryImageBut);
-            galleryImgBut.setOnClickListener(this);
             submit = (Button)findViewById(R.id.submitBut);
             submit.setOnClickListener(this);
+
             if (getIntent().getStringExtra("X_SalesChatter_ID") != null) {
                 x_SalesChat_Parent_ID = Integer.parseInt(getIntent().getStringExtra("X_SalesChatter_ID"));
             }
@@ -59,36 +57,28 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.galleryImageBut){
-            Intent intent = new Intent(Intent.ACTION_PICK,
-                    MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");
-            intent.putExtra("scale", true);
-            intent.putExtra("outputX", 256);
-            intent.putExtra("outputY", 256);
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("return-data", true);
-            startActivityForResult(intent, 2);
-        }
-        else if (view.getId() == R.id.cameraImageBut){
+        if (view.getId() == R.id.cameraImageBut){
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takePictureIntent, 1);
             }
         }
         else if (view.getId() == R.id.submitBut){
+            Log.v("SubmitButtonPress", "PRessed");
             try {
                 X_SalesChatter salesRecord = new X_SalesChatter();
-                salesRecord.setC_BPartner_ID(c_BPartner_ID);
-                salesRecord.setX_SalesChatter_Parent_ID(submit.getId());
+                /** This should be set as current user **/
+                salesRecord.setC_BPartner_ID(1);
+                if (x_SalesChat_Parent_ID > 0){
+                    salesRecord.setX_SalesChatter_Parent_ID(x_SalesChat_Parent_ID);
+                }
                 salesRecord.setMessage(message.getText().toString());
-               // salesRecord.setX_SalesChatter_ID(20);
                 if (imagePath != null)
                     salesRecord.setLinkedImagePath(imagePath);
                 salesRecord.save();
                 finish();
+                Intent intent = new Intent(this.getBaseContext(), SalesChatter.class);
+                startActivity(intent);
             }
             catch (Exception e){
                 Log.e("SavingSalesChatter", e.getLocalizedMessage());
@@ -102,18 +92,11 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Uri imageUri = data.getData();
+            Uri uri = (Uri)extras.get(Intent.EXTRA_STREAM);
+            /** Throwing NPE **/
+            imagePath = uri.getPath();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             img.setImageBitmap(imageBitmap);
-        }
-        else if (requestCode == 2) {
-            final Bundle extras = data.getExtras();
-            if (extras != null) {
-                //Get image
-                Bitmap ProfilePic = extras.getParcelable("data");
-                img.setImageBitmap(ProfilePic);
-
-            }
         }
     }
 

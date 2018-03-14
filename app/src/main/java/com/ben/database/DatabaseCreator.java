@@ -36,7 +36,7 @@ public class DatabaseCreator extends SQLiteOpenHelper {
     private Context context;
 
     public DatabaseCreator(Context context){
-        super(context, SQLITE_DATABASE_NAME, null, 1);
+        super(context, SQLITE_DATABASE_NAME, null, 3);
         this.context = context;
     }
 
