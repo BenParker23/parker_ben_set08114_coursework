@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -28,6 +30,7 @@ import android.widget.Toast;
 
 import com.ben.R;
 import com.ben.database.DBQuery;
+import com.ben.model.I_X_SalesChatter;
 import com.ben.utils.DisplayUtils;
 import com.ben.model.I_X_Action_Purpose;
 import com.ben.model.I_X_Action_Status;
@@ -69,7 +72,9 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
 
 
     private Button emailCust;
-
+    private Button refresh;
+    private Button searchBut;
+    private EditText bpartnerToFind;
     private EditText resultET;
 
 
@@ -77,25 +82,25 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_triggerschedule);
-
         /** Hide the keyboard on load of activity **/
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
+        searchBut = (Button)findViewById(R.id.searchButton);
+        searchBut.setOnClickListener(this);
+        bpartnerToFind = (EditText)findViewById(R.id.bpartnerToFindET);
         listCoorLay = (CoordinatorLayout)findViewById(R.id.coorLayout);
         coorLayDetail = (CoordinatorLayout)findViewById(R.id.coorLayoutDetail);
         acctNo = (TextView)findViewById(R.id.tvAccNoValue);
+        refresh = (Button)findViewById(R.id.refresh);
+        refresh.setOnClickListener(this);
         webPercent = (TextView)findViewById(R.id.tvWebPercentageValue);
         salesValue = (TextView)findViewById(R.id.tvSalesValue2);
         profit = (TextView)findViewById(R.id.tvGrossProfitValue);
         descValue = (TextView)findViewById(R.id.tvDescriptionValue);
         purposeValue = (TextView)findViewById(R.id.tvTrigPurpValue);
-
         emailCust = (Button)findViewById(R.id.emailCustButTS);
         emailCust.setOnClickListener(this);
-
-
         createResultTextView();
-        createActionList();
+        createActionList(null);
         createStatusSpinner();
     }
 
@@ -140,12 +145,26 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    private void createActionList(){
+
+    private void clearActionList(){
+        marginCounter = 200;
+        for (Map.Entry<X_C_BPartner, X_X_Trigger> t : todaysActions.entrySet()) {
+            TextView record = (TextView)findViewById(t.getValue().getX_Trigger_ID());
+            listCoorLay.removeView(record);
+        }
+    }
+
+
+    private void createActionList(String name){
+        clearActionList();
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT X_Action_Status.Name AS StatusName, bp.Email, bp.name as BPName, bp.value, bp.webpercent, bp.SalesValue, bp.GrossProfit, X_Trigger.*, X_Action_Purpose.Name FROM X_Trigger ");
         sb.append("JOIN X_Action_Purpose ON X_Trigger.X_Action_Purpose_ID = X_Action_Purpose.X_Action_Purpose_ID ");
         sb.append("JOIN C_BPartner bp on X_Trigger.C_BPartner_ID = bp.C_BPartner_ID ");
         sb.append("JOIN X_Action_Status on X_Trigger.X_Action_Status_ID = X_Action_Status.X_Action_Status_ID ");
+        if (name != null){
+            sb.append(" WHERE bp.Name = '" + name + "'");
+        }
         DBQuery query = new DBQuery(sb.toString());
         Cursor response = query.executeQuery();
         while (response.moveToNext()){
@@ -172,10 +191,12 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             TextView valueTV = new TextView(this);
             valueTV.setText(response.getString(response.getColumnIndex("BPName")));
             valueTV.setId(action.getX_Trigger_ID());
+            valueTV.setTextSize(24);
+            valueTV.setGravity(Gravity.CENTER);
             valueTV.setLayoutParams(createParams(400, 100, 0));
             valueTV.setOnClickListener(this);
             valueTV.setBackground(createBorder());
-            marginCounter = marginCounter + DisplayUtils.getDPFromPixels(getResources(), 100);
+            marginCounter = marginCounter + DisplayUtils.getDPFromPixels(getResources(), 110);
             listCoorLay.addView(valueTV);
         }
     }
@@ -207,13 +228,34 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         /** Email Customer Event **/
         if (view.getId() == emailCust.getId()){
+            if (emailCust.getTag() == null){
+                Toast.makeText(getBaseContext(), "Please select a trigger record first", Toast.LENGTH_LONG).show();
+                return;
+            }
             X_C_BPartner bp = getCustomerDetails((String)view.getTag());
             Intent intent = new Intent(this.getBaseContext(), EmailCustomer.class);
             intent.putExtra("EmailAddress",bp.getEmail());
             intent.putExtra("EmailBody", "Dear " + bp.getName() + ", ");
             startActivity(intent);
         }
-
+        else if (view.getId() == searchBut.getId()){
+            if (bpartnerToFind.getText().length() == 0){
+                Toast.makeText(getBaseContext(), "Please enter a business partner name first ", Toast.LENGTH_LONG).show();
+            }
+            else {
+                String bpName = bpartnerToFind.getText().toString();
+                for (Map.Entry<X_C_BPartner, X_X_Trigger> t : todaysActions.entrySet()) {
+                    if (t.getKey().getName().contains(bpName)){
+                        createActionList(t.getKey().getName());
+                        break;
+                    }
+                }
+                Toast.makeText(getBaseContext(), "Business Partner " + bpName + " not found", Toast.LENGTH_LONG);
+            }
+        }
+        else if (view.getId() == refresh.getId()){
+            createActionList(null);
+        }
         else {
             createTriggerDetail(view);
         }
@@ -226,25 +268,22 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
      * @param v
      */
     private void createTriggerDetail(View v){
-
-            for (Map.Entry<X_C_BPartner, X_X_Trigger> t : todaysActions.entrySet()) {
-                X_X_Trigger trig = t.getValue();
-                if (trig.getX_Trigger_ID() == v.getId()) {
-                    descValue.setText(trig.getDescription());
-                    purposeValue.setText(trig.getActionPurposeName());
-                    resultET.setId(trig.getX_Trigger_ID());
-                    resultET.setText(trig.getResult());
-                    statusValue.setId(trig.getX_Trigger_ID());
-                    acctNo.setText(t.getKey().getValue());
-                    webPercent.setText(String.valueOf(t.getKey().getWebPercent()));
-                    salesValue.setText(String.valueOf(t.getKey().getSalesValue()));
-                    profit.setText(String.valueOf(t.getKey().getGrossProfit()));
-                    emailCust.setTag(String.valueOf(trig.getX_Trigger_ID()));
-                    assignSpinnerDefaultValue(trig);
-                }
+        for (Map.Entry<X_C_BPartner, X_X_Trigger> t : todaysActions.entrySet()) {
+            X_X_Trigger trig = t.getValue();
+            if (trig.getX_Trigger_ID() == v.getId()) {
+                descValue.setText(trig.getDescription());
+                purposeValue.setText(trig.getActionPurposeName());
+                resultET.setId(trig.getX_Trigger_ID());
+                resultET.setText(trig.getResult());
+                statusValue.setId(trig.getX_Trigger_ID());
+                acctNo.setText(t.getKey().getValue());
+                webPercent.setText(String.valueOf(t.getKey().getWebPercent()));
+                salesValue.setText(String.valueOf(t.getKey().getSalesValue()));
+                profit.setText(String.valueOf(t.getKey().getGrossProfit()));
+                emailCust.setTag(String.valueOf(trig.getX_Trigger_ID()));
+                assignSpinnerDefaultValue(trig);
             }
-
-
+        }
     }
 
 

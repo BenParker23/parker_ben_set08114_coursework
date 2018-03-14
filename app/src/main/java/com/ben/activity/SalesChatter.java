@@ -43,8 +43,6 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
     private ArrayList<X_SalesChatter> chats = new ArrayList<>();
     private Button addMessage;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,7 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
         createViews();
     }
 
-
+    /** Get all sales chatter records stored in the local db **/
     private void getSalesChatRecords(){
         String sql = "SELECT X_SalesChatter.*, C_BPartner.Name FROM X_SalesChatter JOIN C_BPartner ON X_SalesChatter.C_BPartner_ID = C_BPartner.C_BPartner_ID ";
         DBQuery query = new DBQuery(sql);
@@ -88,7 +86,6 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
                 replyCount.setText((chat.getReplyCounter() + 1) + " replies");
                 replyCount.setOnClickListener(this);
                 replyCount.setTag("ViewReplies");
-
                 chat.setReplyCounter(chat.getReplyCounter() + 1);
                 try { chat.save(); } catch (Exception e){ Log.e("ReplyCount", e.getLocalizedMessage()); }
                 coorLay.addView(replyCount);
@@ -133,8 +130,6 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
     private ShapeDrawable createBorder(){
         ShapeDrawable sd = new ShapeDrawable();
         sd.setShape(new RectShape());
@@ -145,8 +140,7 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
+    /** Create MarginLayoutParams for descending textviews **/
     private ViewGroup.MarginLayoutParams createParams(int width, int height, int left){
         ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(
                 DisplayUtils.getDPFromPixels(getResources(), width),
@@ -159,6 +153,7 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    /** Create unique params for Reply Counter button **/
     private ViewGroup.MarginLayoutParams createLinkedParams(ViewGroup.LayoutParams param, int width, int height){
         ViewGroup.MarginLayoutParams paramHeight = (ViewGroup.MarginLayoutParams)param;
         ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(

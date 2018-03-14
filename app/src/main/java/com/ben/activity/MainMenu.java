@@ -38,10 +38,10 @@ import java.util.List;
  * @created 6/2/2018
  * @usage  Main Menu activity showing user all options
  * after logging into the app
+ * Once I connect this app to the webservice I can create
+ * useful charts for the salesman using correct structured data
  */
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         Button salesChatBut = (Button)findViewById(R.id.SalesChatterBut);
         salesChatBut.setOnClickListener(this);
 
+        /** Create the default charts which in future will show real data **/
         createLineChart();
         createBarChart();
         createPieChart();
@@ -88,7 +89,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         for (int y = 0 ; y < 10 ; y++) {
             // turn data into Entry objects
             barEntries.add(new BarEntry(y+1, y));
-            Log.v("Entry", y  + " " + y+1);
         }
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "Data "); // add entries to dataset
@@ -107,9 +107,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
         List<Entry> entries = new ArrayList<>();
         for (int i = 0 ; i < 10 ; i++) {
-            // turn data into Entry objects
             entries.add(new Entry(i, i+1));
-            Log.v("Entry", i  + " " + i+1);
         }
 
         LineDataSet dataSet = new LineDataSet(entries, "Data "); // add entries to dataset
@@ -127,9 +125,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
         List<PieEntry> entries = new ArrayList<>();
         for (int i = 0 ; i < 10 ; i++) {
-            // turn data into Entry objects
             entries.add(new PieEntry(i, i+1));
-            Log.v("Entry", i  + " " + i+1);
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Data "); // add entries to dataset
