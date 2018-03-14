@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.idempiere.database.DBQuery;
-import com.idempiere.webserviceRequest.UserDetailsRequest;
+import com.ben.database.DBQuery;
+import com.ben.webservicerequest.UserDetailsRequest;
 
 import org.json.JSONObject;
 

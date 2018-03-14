@@ -52,12 +52,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         trigSchedBut.setOnClickListener(this);
         Button custListBut = (Button)findViewById(R.id.manageCustomerBut);
         custListBut.setOnClickListener(this);
-        Button leadLeadBut = (Button)findViewById(R.id.manageLeadBut);
-        leadLeadBut.setOnClickListener(this);
         Button emailCustBut = (Button)findViewById(R.id.emailCustomerBut);
         emailCustBut.setOnClickListener(this);
-        Button routePlanBut = (Button)findViewById(R.id.routePlanBut);
-        routePlanBut.setOnClickListener(this);
+        Button salesChatBut = (Button)findViewById(R.id.SalesChatterBut);
+        salesChatBut.setOnClickListener(this);
 
         createLineChart();
         createBarChart();
@@ -72,20 +70,12 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
             Intent intent = new Intent(this.getBaseContext(), TriggerSchedule.class);
             startActivity(intent);
         }
-        else if (view.getId() == R.id.manageCustomerBut){
-            Intent intent = new Intent(this.getBaseContext(), CustomerList.class);
-            startActivity(intent);
-        }
-        else if (view.getId() == R.id.manageLeadBut){
-            Intent intent = new Intent(this.getBaseContext(), LeadList.class);
-            startActivity(intent);
-        }
         else if (view.getId() == R.id.emailCustomerBut){
             Intent intent = new Intent(this.getBaseContext(), EmailCustomer.class);
             startActivity(intent);
         }
-        else if (view.getId() == R.id.routePlanBut){
-            Intent intent = new Intent(this.getBaseContext(), RoutePlan.class);
+        else if (view.getId() == R.id.SalesChatterBut){
+            Intent intent = new Intent(this.getBaseContext(), SalesChatter.class);
             startActivity(intent);
         }
     }

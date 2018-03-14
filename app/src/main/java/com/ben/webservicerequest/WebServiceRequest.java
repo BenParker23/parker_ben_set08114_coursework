@@ -32,6 +32,8 @@ public class WebServiceRequest implements I_WebServiceRequest {
     protected X_ModelADServiceSoapBinding soapBinding;
     protected String type;
     protected ArrayList<String> allTypes = new ArrayList<>();
+
+    /** Local development url of webservice **/
     protected String BASE_URL = "http://10.0.2.2:8080/ADInterface/services/ModelADService/";
 
     /**

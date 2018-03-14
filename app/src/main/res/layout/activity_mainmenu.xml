@@ -14,41 +14,34 @@
         android:layout_width="397dp"
         android:layout_height="75dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="320dp"
+        android:layout_marginBottom="240dp"
         android:text="Manage Schedule" />
 
 
-    <Button
-        android:id="@+id/routePlanBut"
-        android:layout_width="397dp"
-        android:layout_height="75dp"
-        android:layout_gravity="bottom"
-        android:text="Generate Route Plan" />
-
-    <Button
-        android:id="@+id/manageLeadBut"
-        android:layout_width="397dp"
-        android:layout_height="75dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="160dp"
-        android:text="Manage Leads" />
-
-    <Button
+        <Button
         android:id="@+id/manageCustomerBut"
         android:layout_width="397dp"
         android:layout_height="75dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="160dp"
         android:text="Manage Customers" />
 
 
     <Button
-        android:id="@+id/emailCustomerBut"
+        android:id="@+id/SalesChatterBut"
         android:layout_width="396dp"
         android:layout_height="75dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="80dp"
-        android:text="Email" />
+        android:layout_marginBottom="5dp"
+        android:text="Sales Chatter" />
+
+        <Button
+            android:id="@+id/emailCustomerBut"
+            android:layout_width="396dp"
+            android:layout_height="75dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="80dp"
+            android:text="Email" />
 
     <TextView
         android:id="@+id/greetingText"

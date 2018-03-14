@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -34,21 +36,20 @@
             android:label="Email Customer">
         </activity>
         <activity
-            android:name="com.ben.activity.CustomerList"
-            android:label="Customer List">
-        </activity>
-        <activity
-            android:name="com.ben.activity.LeadList"
-            android:label="Lead List">
-        </activity>
-        <activity
             android:name="com.ben.activity.TriggerSchedule"
             android:label="Trigger Schedule">
         </activity>
         <activity
-            android:name="com.ben.activity.RoutePlan"
-            android:label="Route Plan">
+            android:name="com.ben.activity.SalesChatter"
+            android:label="Sales Chatter">
         </activity>
+        <activity
+            android:theme="@style/Theme.AppCompat.Dialog.Alert"
+            android:name="com.ben.activity.Reply"
+            android:label="Reply">
+        </activity>
+
+
     </application>
 
 </manifest>

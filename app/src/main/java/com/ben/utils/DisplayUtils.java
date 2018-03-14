@@ -1,7 +1,9 @@
-package com.ben.display;
+package com.ben.utils;
 
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.ViewGroup;
 
 /**
  * Created by ben on 22/02/18.
@@ -13,4 +15,5 @@ public class DisplayUtils {
         int pix = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, r.getDisplayMetrics());
         return pix;
     }
+
 }

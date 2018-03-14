@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import com.ben.R;
 import com.ben.database.DBQuery;
-import com.ben.display.DisplayUtils;
+import com.ben.utils.DisplayUtils;
 import com.ben.model.I_X_Action_Purpose;
 import com.ben.model.I_X_Action_Status;
 import com.ben.model.I_X_C_BPartner;
