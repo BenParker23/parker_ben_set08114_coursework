@@ -1,5 +1,6 @@
 package com.ben.activity;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -8,6 +9,8 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ben.R;
+import com.ben.model.X_Login_Detail;
 import com.ben.model.X_SalesChatter;
 
 /**
@@ -68,7 +72,7 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
             try {
                 X_SalesChatter salesRecord = new X_SalesChatter();
                 /** This should be set as current user **/
-                salesRecord.setC_BPartner_ID(1001006);
+                salesRecord.setC_BPartner_ID(X_Login_Detail.getLoggedInUser());
                 if (x_SalesChat_Parent_ID > 0){
                     salesRecord.setX_SalesChatter_Parent_ID(x_SalesChat_Parent_ID);
                 }
@@ -77,6 +81,25 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
                     salesRecord.setLinkedImagePath(imagePath);
                 salesRecord.save();
                 finish();
+
+                /** Create the action that happens when the user clicks on the notification **/
+                Intent pIntent = new Intent(this, SalesChatter.class);
+                pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, pIntent, 0);
+
+                /** Create the notification **/
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, null)
+                        .setSmallIcon(R.drawable.suthbroslogo)
+                        .setContentTitle("SB - Message Created")
+                        .setContentText("Your message : " + salesRecord.getMessage() + " - has been added to Sales Chatter. You'll be notified when you receive a reply.")
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true);
+
+                /** Send the notification **/
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                notificationManager.notify(salesRecord.getX_SalesChatter_ID(), mBuilder.build());
+
                 Intent intent = new Intent(this.getBaseContext(), SalesChatter.class);
                 startActivity(intent);
             }

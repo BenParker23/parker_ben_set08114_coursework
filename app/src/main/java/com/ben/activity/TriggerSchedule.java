@@ -67,7 +67,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
     private TextView purposeValue;
     private Spinner statusValue;
 
-    private Button generateRoute;
+
     private Button emailCust;
 
     private EditText resultET;
@@ -92,8 +92,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
 
         emailCust = (Button)findViewById(R.id.emailCustButTS);
         emailCust.setOnClickListener(this);
-        generateRoute = (Button)findViewById(R.id.generateRouteButTS);
-        generateRoute.setOnClickListener(this);
+
 
         createResultTextView();
         createActionList();
@@ -214,10 +213,7 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             intent.putExtra("EmailBody", "Dear " + bp.getName() + ", ");
             startActivity(intent);
         }
-        /** Generate Route Event **/
-        else if (view.getId() == generateRoute.getId()){
 
-        }
         else {
             createTriggerDetail(view);
         }
