@@ -75,7 +75,7 @@ public class WSRUtils {
 
     public static X_ADLoginRequest createLoginRequest(String user, String pass){
         if (user == null || pass == null) {
-            X_Login_Detail details = DBUtils.getLoggedInUser();
+            X_Login_Detail details = new X_Login_Detail();
             if (details.getUsername() == null){
                 throw new SalesAppException(" No Username/password passed to WSRUtils AND No Login_Detail record saved for current logged in user ");
             }

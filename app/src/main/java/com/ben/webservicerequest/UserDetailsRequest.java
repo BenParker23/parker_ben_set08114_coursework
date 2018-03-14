@@ -59,8 +59,8 @@ public class UserDetailsRequest extends AsyncTask<Void, Void, X_Login_Detail> {
             for (int j = 0 ; j < dataRow.size() ; j++) {
                 X_DataField dataField = dataRow.get(j);
                 switch(dataField.column){
-                    case(I_X_LoginDetail.ColumnName_AD_User_ID):
-                        detail.setAd_User_ID(Integer.parseInt(dataField.val));
+                    //case(I_X_LoginDetail.ColumnName_AD_User_ID):
+                   //     detail.setAd_User_ID(Integer.parseInt(dataField.val));
                     case(I_X_LoginDetail.ColumnName_C_BPartner_ID):
                         detail.setC_Bpartner_ID(Integer.parseInt(dataField.val));
                     case(I_X_LoginDetail.ColumnName_Username):

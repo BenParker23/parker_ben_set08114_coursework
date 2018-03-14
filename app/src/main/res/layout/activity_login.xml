@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ben.com.idempiere.activity.LoginActivity">
+    tools:context="com.ben.activity.LoginActivity">
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="600dp"
         android:layout_height="match_parent">
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="74dp"
             android:layout_gravity="top"
-            android:layout_marginTop="350dp"
+            android:layout_marginTop="300dp"
             android:background="@color/white"
             android:ems="10"
             android:hint="Password"
@@ -39,17 +39,28 @@
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_gravity="top"
-            android:layout_marginTop="500dp"
+            android:layout_marginTop="400dp"
             android:background="@color/green"
             android:text="Log In"
             android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="top"
+            android:layout_marginTop="540dp"
+            android:background="@color/green"
+            android:text="No Account? Sign Up!"
+            android:textColor="@color/white" />
+
 
         <EditText
             android:id="@+id/usernameText"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:layout_gravity="top"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="220dp"
             android:background="@color/white"
             android:ems="10"
             android:hint="Username"

@@ -1,6 +1,8 @@
 package com.ben.model;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.util.Log;
 
 import com.ben.database.DBQuery;
 
@@ -829,13 +831,23 @@ public class X_C_BPartner extends DBObject implements I_X_C_BPartner {
 
     private double SalesValue;
     private String Email;
+    private int X_LoginDetail_ID;
 
+
+    public int getX_LoginDetail_ID() {
+        return X_LoginDetail_ID;
+    }
+
+    public void setX_LoginDetail_ID(int x_LoginDetail_ID) {
+        X_LoginDetail_ID = x_LoginDetail_ID;
+    }
 
     @Override
     public long save() throws Exception {
         ContentValues values = new ContentValues();
-        values.put(I_X_C_BPartner.COLUMNNAME_C_BPartner_ID, getC_BPartner_ID());
+
         values.put(I_X_C_BPartner.COLUMNNAME_C_BP_Group_ID, getC_BP_Group_ID());
+        values.put(I_X_C_BPartner.COLUMNNAME_X_LoginDetail_ID, getX_LoginDetail_ID());
         values.put(I_X_C_BPartner.COLUMNNAME_C_PaymentTerm_ID, getC_PaymentTerm_ID());
         values.put(I_X_C_BPartner.COLUMNNAME_C_TaxGroup_ID, getC_TaxGroup_ID());
         values.put(I_X_C_BPartner.COLUMNNAME_DeliveryRule, getDeliveryRule());
@@ -852,7 +864,14 @@ public class X_C_BPartner extends DBObject implements I_X_C_BPartner {
         values.put(I_X_C_BPartner.COLUMNNAME_SO_CreditUsed, getSO_CreditUsed());
         values.put(I_X_C_BPartner.COLUMNNAME_Name, getName());
         values.put(I_X_C_BPartner.COLUMNNAME_M_PriceList_ID, getM_Pricelist_ID());
-        return DBQuery.insertValues(I_X_C_BPartner.Table_Name, values);
+        long resp =  DBQuery.insertValues(I_X_C_BPartner.Table_Name, values);
+        String sql2 = "SELECT C_BPartner_ID FROM C_Bpartner WHERE Name = '" + getName() + "' ";
+        Cursor response2 = DBQuery.executeQuery(sql2);
+        while (response2.moveToNext()){
+            setC_BPartner_ID(response2.getInt(response2.getColumnIndex(I_X_C_BPartner.COLUMNNAME_C_BPartner_ID)));
+        }
+        Log.v("AfterBPCreate", String.valueOf(getC_BPartner_ID()));
+        return resp;
     }
 
 

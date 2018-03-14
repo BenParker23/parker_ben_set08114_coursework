@@ -94,6 +94,7 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
                 coorLay.addView(replyCount);
             }
             else {
+                /**
                 ImageView img = new ImageView(this);
                 File imgFile = new  File(chat.getLinkedImagePath());
                 if(imgFile.exists()){
@@ -101,7 +102,7 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
                     Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                     img.setImageBitmap(myBitmap);
                 }
-
+                **/
 
                 TextView user = new TextView(this);
                 user.setText(chat.getBpName());
@@ -178,7 +179,7 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this.getBaseContext(), Reply.class);
             startActivity(intent);
         }
-        else if (view.getTag().equals("ViewReplies") || view.getTag().equals("MakeReply")){
+        else if (view.getTag() != null && ( view.getTag().equals("ViewReplies") || view.getTag().equals("MakeReply") )){
             for (X_SalesChatter chat : chats){
                 if (view.getId() == chat.getX_SalesChatter_ID()){
                     Intent intent = new Intent(this.getBaseContext(), Reply.class);

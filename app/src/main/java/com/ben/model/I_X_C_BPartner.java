@@ -1232,6 +1232,7 @@ public interface I_X_C_BPartner {
      */
     public void setValue(String Value);
 
+    static final String COLUMNNAME_X_LoginDetail_ID = "X_LoginDetail_ID";
     /**
      * Get Search Key.
      * Search key for the record in the format required - must be unique
@@ -1239,8 +1240,9 @@ public interface I_X_C_BPartner {
     public String getValue();
 
     static String tableCreationSQL = "CREATE TABLE C_BPartner ( "
-            + COLUMNNAME_C_BPartner_ID + " INTEGER PRIMARY KEY , "
+            + COLUMNNAME_C_BPartner_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
             + COLUMNNAME_C_BP_Group_ID + " INTEGER, "
+            + COLUMNNAME_X_LoginDetail_ID + " INTEGER, "
             + COLUMNNAME_C_PaymentTerm_ID + " INTEGER, "
             + COLUMNNAME_C_TaxGroup_ID + " INTEGER, "
             + COLUMNNAME_Created + " TEXT, "

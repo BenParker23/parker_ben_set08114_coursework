@@ -68,7 +68,7 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
             try {
                 X_SalesChatter salesRecord = new X_SalesChatter();
                 /** This should be set as current user **/
-                salesRecord.setC_BPartner_ID(1);
+                salesRecord.setC_BPartner_ID(1001006);
                 if (x_SalesChat_Parent_ID > 0){
                     salesRecord.setX_SalesChatter_Parent_ID(x_SalesChat_Parent_ID);
                 }

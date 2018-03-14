@@ -44,7 +44,7 @@ public class PullDataRequest extends AsyncTask<DBObject, Void, X_RunProcessRespo
 
     public PullDataRequest(int SMA_App_Table_ID){
         this.SMA_App_Table_ID = SMA_App_Table_ID;
-        this.AD_User_ID = DBUtils.getLoggedInUser().getAd_User_ID();
+        this.AD_User_ID = 0;
         Log.v("AD_User_ID", "" + AD_User_ID);
     }
 

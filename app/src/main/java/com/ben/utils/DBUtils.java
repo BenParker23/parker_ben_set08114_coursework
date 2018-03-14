@@ -18,7 +18,7 @@ public class DBUtils {
         while (userCursor.moveToNext()){
             details.setUsername(userCursor.getString(userCursor.getColumnIndex(X_Login_Detail.ColumnName_Username)));
             details.setPassword(userCursor.getString(userCursor.getColumnIndex(X_Login_Detail.ColumnName_Password)));
-            details.setAd_User_ID(userCursor.getInt(userCursor.getColumnIndex(X_Login_Detail.ColumnName_AD_User_ID)));
+            //details.setAd_User_ID(userCursor.getInt(userCursor.getColumnIndex(X_Login_Detail.ColumnName_AD_User_ID)));
             details.setC_Bpartner_ID(userCursor.getInt(userCursor.getColumnIndex(X_Login_Detail.ColumnName_C_BPartner_ID)));
         }
         userCursor.close();

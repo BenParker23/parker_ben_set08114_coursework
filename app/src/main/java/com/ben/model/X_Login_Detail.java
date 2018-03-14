@@ -15,13 +15,32 @@ import org.json.JSONObject;
 
 public class X_Login_Detail extends DBObject implements I_X_LoginDetail{
 
-    /** On save of this class query web-service and find out AD_user_ID **/
-
     private String username;
     private String password;
-    private int ad_User_ID;
     private int c_Bpartner_ID;
     private String isActiveUser;
+    private int X_LoginDetail_ID;
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    private String Name;
+    private String Email;
+
+    public static int activeUserID = 0;
 
     public String isActiveUser() { return isActiveUser; }
 
@@ -43,16 +62,16 @@ public class X_Login_Detail extends DBObject implements I_X_LoginDetail{
         this.c_Bpartner_ID = c_Bpartner_ID;
     }
 
-    public int getAd_User_ID() {
-        return ad_User_ID;
-    }
-
-    public void setAd_User_ID(int ad_User_ID) {
-        this.ad_User_ID = ad_User_ID;
-    }
-
     public String getUsername() {
         return username;
+    }
+
+    public int getX_LoginDetail_ID() {
+        return X_LoginDetail_ID;
+    }
+
+    public void setX_LoginDetail_ID(int x_LoginDetail_ID) {
+        X_LoginDetail_ID = x_LoginDetail_ID;
     }
 
     public void setUsername(String username) {
@@ -61,38 +80,59 @@ public class X_Login_Detail extends DBObject implements I_X_LoginDetail{
 
 
 
-    /** On save of this record we first fetch the users AD_User_ID and C_BPartner_ID from the Database **/
+
     @Override
     public long save() throws Exception {
-        if (ad_User_ID == 0 || c_Bpartner_ID == 0){
-            X_Login_Detail detail = new UserDetailsRequest(username, password).execute().get();
-            if (detail.getAd_User_ID() != 0){
-                ad_User_ID = detail.getAd_User_ID();
-            }
-            if (detail.getC_Bpartner_ID() != 0){
-                c_Bpartner_ID = detail.getC_Bpartner_ID();
-            }
+        ContentValues values = new ContentValues();
+        values.put(I_X_LoginDetail.ColumnName_C_BPartner_ID, c_Bpartner_ID);
+        values.put(I_X_LoginDetail.ColumnName_Username, username);
+        values.put(I_X_LoginDetail.ColumnName_Password, password);
+        values.put(I_X_LoginDetail.ColumnName_IsActiveUser, isActiveUser);
+        values.put(I_X_LoginDetail.ColumnName_Name, getName());
+        values.put(I_X_LoginDetail.ColumnName_Email, getEmail());
+        Log.v("InsertingValues", "SavingLoginDetails");
+        long resp = DBQuery.insertValues(I_X_LoginDetail.Table_Name, values);
+        String sql2 = "SELECT X_LoginDetail_ID FROM X_Login_Detail WHERE Username = '" + username + "' AND password = '" + password + "'";
+        Cursor response2 = DBQuery.executeQuery(sql2);
+        while (response2.moveToNext()){
+            setX_LoginDetail_ID(response2.getInt(response2.getColumnIndex(I_X_LoginDetail.ColumnName_X_LoginDetail_ID)));
         }
-        int ad_User = 0;
-        Cursor curs = DBQuery.executeQuery("SELECT * FROM X_Login_Detail WHERE AD_User_ID = " + ad_User_ID + " ");
-        while (curs.moveToNext()) {
-            ad_User = curs.getInt(curs.getColumnIndex(I_X_LoginDetail.ColumnName_AD_User_ID));
-        }
-        if (ad_User == 0) {
-            ContentValues values = new ContentValues();
-            values.put(I_X_LoginDetail.ColumnName_AD_User_ID, ad_User_ID);
-            values.put(I_X_LoginDetail.ColumnName_C_BPartner_ID, c_Bpartner_ID);
-            values.put(I_X_LoginDetail.ColumnName_Username, username);
-            values.put(I_X_LoginDetail.ColumnName_Password, password);
-            values.put(I_X_LoginDetail.ColumnName_IsActiveUser, isActiveUser);
-            Log.v("InsertingValues", "SavingLoginDetails");
-            return DBQuery.insertValues(I_X_LoginDetail.Table_Name, values);
-        }
-        else {
-            Log.i("InsertingUser", "User record already exists");
-            return -1;
-        }
+        return resp;
     }
+
+    public static int validate(String user, String password){
+        int userID = 0;
+        /** Testing **/
+        String sql2 = "SELECT C_BPartner_ID FROM X_Login_Detail ";
+        Cursor response2 = DBQuery.executeQuery(sql2);
+        while (response2.moveToNext()){
+            Log.v("UserID : ", String.valueOf(response2.getInt(response2.getColumnIndex(I_X_LoginDetail.ColumnName_C_BPartner_ID))));
+        }
+
+
+        String sql = "SELECT C_BPartner_ID FROM X_Login_Detail WHERE Username = '" + user + "' AND Password = '" + password + "'";
+        Cursor response = DBQuery.executeQuery(sql);
+        while (response.moveToNext()){
+            userID = response.getInt(response.getColumnIndex(I_X_LoginDetail.ColumnName_C_BPartner_ID));
+        }
+        Log.v("UserIDValidation", String.valueOf(userID));
+        return userID;
+    }
+
+
+    public static void setLoggedInUser(int userID){
+        ContentValues isActive = new ContentValues();
+        isActive.put("IsActiveUser", "Y");
+        String[]args = new String[1];
+        args[0] = String.valueOf(userID);
+        DBQuery.executeUpdate(I_X_LoginDetail.Table_Name, isActive, "X_LoginDetail_ID = ?", args);
+        activeUserID = userID;
+    }
+
+    public static int getLoggedInUser(){
+        return activeUserID;
+    }
+
 
     @Override
     public void fromJson(JSONObject responseObject) {
