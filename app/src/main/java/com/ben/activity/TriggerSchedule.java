@@ -193,9 +193,11 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             valueTV.setId(action.getX_Trigger_ID());
             valueTV.setTextSize(24);
             valueTV.setGravity(Gravity.CENTER);
+            valueTV.setBackgroundResource(R.color.green);
+            valueTV.setTextColor(Color.WHITE);
             valueTV.setLayoutParams(createParams(400, 100, 0));
             valueTV.setOnClickListener(this);
-            valueTV.setBackground(createBorder());
+            //valueTV.set(createBorder());
             marginCounter = marginCounter + DisplayUtils.getDPFromPixels(getResources(), 110);
             listCoorLay.addView(valueTV);
         }

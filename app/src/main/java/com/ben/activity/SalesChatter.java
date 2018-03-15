@@ -80,12 +80,11 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
             if (chat.getX_SalesChatter_Parent_ID() != 0){
                 parent = (TextView)findViewById(chat.getX_SalesChatter_Parent_ID());
                 parent.setHeight(DisplayUtils.getDPFromPixels(getResources(), ( 50 )));
-                parent.setText((chat.getReplyCounter() + 1) + " replies" + parent.getText());
-                Button replyCount = new Button(this);
+
+                TextView replyCount = new TextView(this);
                 replyCount.setLayoutParams(createLinkedParams(parent.getLayoutParams(),150, 50));
                 replyCount.setText((chat.getReplyCounter() + 1) + " replies");
-                replyCount.setOnClickListener(this);
-                replyCount.setTag("ViewReplies");
+                replyCount.setTextSize(20);
                 chat.setReplyCounter(chat.getReplyCounter() + 1);
                 try { chat.save(); } catch (Exception e){ Log.e("ReplyCount", e.getLocalizedMessage()); }
                 coorLay.addView(replyCount);
@@ -113,10 +112,14 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
                 valueTV.setLayoutParams(createParams(800, 100, 150));
                 valueTV.setOnClickListener(this);
                 valueTV.setBackground(createBorder());
+                valueTV.setBackgroundResource(R.color.green);
+                valueTV.setTextColor(Color.WHITE);
                 valueTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
                 Button reply = new Button(this);
                 reply.setText("Reply");
                 reply.setId(chat.getX_SalesChatter_ID());
+                reply.setBackgroundResource(R.color.green);
+                reply.setTextColor(Color.WHITE);
                 reply.setTag("MakeReply");
                 reply.setLayoutParams(createParams(150, 50, 975));
                 reply.setOnClickListener(this);
@@ -174,7 +177,7 @@ public class SalesChatter extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this.getBaseContext(), Reply.class);
             startActivity(intent);
         }
-        else if (view.getTag() != null && ( view.getTag().equals("ViewReplies") || view.getTag().equals("MakeReply") )){
+        else if (view.getTag() != null &&  view.getTag().equals("MakeReply")){
             for (X_SalesChatter chat : chats){
                 if (view.getId() == chat.getX_SalesChatter_ID()){
                     Intent intent = new Intent(this.getBaseContext(), Reply.class);

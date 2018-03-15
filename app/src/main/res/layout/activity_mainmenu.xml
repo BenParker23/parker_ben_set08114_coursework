@@ -12,25 +12,23 @@
     <Button
         android:id="@+id/actionScheduleBut"
         android:layout_width="397dp"
+        android:background="@color/green"
+        android:textColor="@color/white"
         android:layout_height="75dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="195dp"
         android:text="Manage Schedule" />
 
 
-        <Button
-        android:id="@+id/manageCustomerBut"
-        android:layout_width="397dp"
-        android:layout_height="75dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="160dp"
-        android:text="Manage Customers" />
+
 
 
     <Button
         android:id="@+id/SalesChatterBut"
         android:layout_width="396dp"
         android:layout_height="75dp"
+        android:background="@color/green"
+        android:textColor="@color/white"
         android:layout_gravity="bottom"
         android:layout_marginBottom="5dp"
         android:text="Sales Chatter" />
@@ -40,7 +38,9 @@
             android:layout_width="396dp"
             android:layout_height="75dp"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="80dp"
+            android:background="@color/green"
+            android:textColor="@color/white"
+            android:layout_marginBottom="100dp"
             android:text="Email" />
 
     <TextView
@@ -48,6 +48,8 @@
         android:layout_width="378dp"
         android:layout_height="57dp"
         android:layout_gravity="top"
+
+        android:textColor="@color/green"
         android:layout_marginLeft="5dp"
         android:text="Good Morning Ben"
         android:textSize="36sp"

@@ -16,6 +16,8 @@
             <Button
                 android:id="@+id/addEmailBut"
                 android:layout_width="100dp"
+                android:background="@color/green"
+                android:textColor="@color/white"
                 android:layout_height="50dp"
                 android:layout_marginLeft="300dp"
                 android:text="Add" />
@@ -59,6 +61,8 @@
             <Button
                 android:id="@+id/csoTempBut"
                 android:layout_width="397dp"
+                android:background="@color/green"
+                android:textColor="@color/white"
                 android:layout_height="75dp"
                 android:layout_gravity="bottom"
                 android:layout_marginTop="250dp"
@@ -70,6 +74,8 @@
                 android:id="@+id/introTempBut"
                 android:layout_width="397dp"
                 android:layout_height="75dp"
+                android:background="@color/green"
+                android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="160dp"
                 android:text="Introduction" />
@@ -78,6 +84,8 @@
                 android:id="@+id/meetingTempBut"
                 android:layout_width="397dp"
                 android:layout_height="75dp"
+                android:background="@color/green"
+                android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="240dp"
                 android:text="Arrange A Meeting" />
@@ -87,6 +95,8 @@
                 android:id="@+id/newCustTempBut"
                 android:layout_width="396dp"
                 android:layout_height="75dp"
+                android:background="@color/green"
+                android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="80dp"
                 android:text="New Account" />
@@ -95,6 +105,8 @@
                 android:id="@+id/promoTempBut"
                 android:layout_width="397dp"
                 android:layout_height="75dp"
+                android:background="@color/green"
+                android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:text="Promotions" />
 
@@ -144,6 +156,8 @@
                 android:id="@+id/sendEmailBut"
                 android:layout_width="200dp"
                 android:layout_height="100dp"
+                android:background="@color/green"
+                android:textColor="@color/white"
                 android:layout_weight="1"
                 android:layout_marginTop="425dp"
                 android:layout_marginLeft="610dp"

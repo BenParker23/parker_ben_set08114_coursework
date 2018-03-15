@@ -50,8 +50,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
         Button trigSchedBut = (Button)findViewById(R.id.actionScheduleBut);
         trigSchedBut.setOnClickListener(this);
-        Button custListBut = (Button)findViewById(R.id.manageCustomerBut);
-        custListBut.setOnClickListener(this);
+
         Button emailCustBut = (Button)findViewById(R.id.emailCustomerBut);
         emailCustBut.setOnClickListener(this);
         Button salesChatBut = (Button)findViewById(R.id.SalesChatterBut);
@@ -92,9 +91,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         }
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "Data "); // add entries to dataset
-        barDataSet.setColor(Color.GRAY);
+        barDataSet.setColor(Color.parseColor("#3e763e"));
         barDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-        barDataSet.setValueTextColor(Color.BLACK);
+        barDataSet.setValueTextColor(Color.parseColor("#3e763e"));
 
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
@@ -111,7 +110,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         }
 
         LineDataSet dataSet = new LineDataSet(entries, "Data "); // add entries to dataset
-        dataSet.setColor(Color.GRAY);
+        dataSet.setColor(Color.parseColor("#3e763e"));
         dataSet.setValueTextColor(Color.BLACK);
 
         LineData lineData = new LineData(dataSet);
@@ -129,7 +128,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Data "); // add entries to dataset
-        dataSet.setColor(Color.GRAY);
+        dataSet.setColor(Color.parseColor("#3e763e"));
         dataSet.setValueTextColor(Color.BLACK);
 
         PieData lineData = new PieData(dataSet);
@@ -157,13 +156,13 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
         CandleDataSet dataSet = new CandleDataSet(entries, "Data "); // add entries to dataset
         dataSet.setColor(Color.rgb(80, 80, 80));
-        dataSet.setShadowColor(Color.GRAY);
+        dataSet.setShadowColor(Color.parseColor("#3e763e"));
         dataSet.setShadowWidth(1.5f);
-        dataSet.setDecreasingColor(Color.GRAY);
+        dataSet.setDecreasingColor(Color.parseColor("#3e763e"));
         dataSet.setDecreasingPaintStyle(Paint.Style.FILL);
-        dataSet.setIncreasingColor(Color.GRAY);
+        dataSet.setIncreasingColor(Color.parseColor("#3e763e"));
         dataSet.setIncreasingPaintStyle(Paint.Style.FILL);
-        dataSet.setNeutralColor(Color.GRAY);
+        dataSet.setNeutralColor(Color.parseColor("#3e763e"));
         dataSet.setValueTextColor(Color.RED);
 
         CandleData candleData = new CandleData(dataSet);

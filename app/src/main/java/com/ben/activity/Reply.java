@@ -117,7 +117,7 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
             Bundle extras = data.getExtras();
             Uri uri = (Uri)extras.get(Intent.EXTRA_STREAM);
             /** Throwing NPE **/
-            imagePath = uri.getPath();
+          //  imagePath = uri.getPath();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             img.setImageBitmap(imageBitmap);
         }

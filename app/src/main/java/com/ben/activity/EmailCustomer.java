@@ -121,25 +121,30 @@ public class EmailCustomer extends AppCompatActivity implements View.OnClickList
     }
 
     private void sendEmail(){
-
-        Intent intent = new Intent(Intent.ACTION_SEND); // it's not ACTION_SEND
-        intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject of email");
-        intent.putExtra(Intent.EXTRA_TEXT, "Body of email");
-        intent.setData(Uri.parse("mailto:benparker_93@outlook.com")); // or just "mailto:" for blank
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject of email");
+            intent.putExtra(Intent.EXTRA_TEXT, "Body of email");
+            intent.setData(Uri.parse("mailto:benparker_93@outlook.com")); // or just "mailto:" for blank
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+            startActivity(intent);
+        }
+        catch (Exception e){
+            Toast.makeText(getBaseContext(), "Email feature is only supported on physical device", Toast.LENGTH_LONG).show();
+            Log.e("EmailOnEmulator", "Email does not work on emulator");
+        }
     }
 
     private void addEmail(){
         if ("".equals(emailAddr.getText())){
             Log.v("EmailAddr", "EmaiLAddr Is Null");
-            Toast.makeText(getBaseContext(), "Cannot add null email", Toast.LENGTH_LONG);
+            Toast.makeText(getBaseContext(), "Cannot add null email", Toast.LENGTH_LONG).show();
             return;
         }
         else if (!emailAddr.getText().toString().contains("@")){
             Log.v("EmailAddr", "Does not contain @ ");
-            Toast.makeText(getBaseContext(), "Please enter valid email and add again", Toast.LENGTH_LONG);
+            Toast.makeText(getBaseContext(), "Please enter valid email and add again", Toast.LENGTH_LONG).show();
             return;
         }
 

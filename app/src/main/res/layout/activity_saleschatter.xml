@@ -13,6 +13,8 @@
         android:layout_height="64dp"
         android:layout_marginLeft="450dp"
         android:text="Sales Chatter"
+
+        android:textColor="@color/green"
         android:textAlignment="center"
         android:textSize="40dp" />
 
@@ -38,6 +40,8 @@
         android:id="@+id/addMessageBut"
         android:layout_width="200dp"
         android:layout_height="100dp"
+        android:background="@color/green"
+        android:textColor="@color/white"
         android:text="Add Message"
         android:layout_marginLeft="1075dp"
         android:layout_marginTop="20dp"/>
