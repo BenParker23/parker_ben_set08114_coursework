@@ -112,9 +112,6 @@ public class EmailCustomer extends AppCompatActivity implements View.OnClickList
         DBQuery query = new DBQuery(sb.toString());
         Cursor response = query.executeQuery();
         while (response.moveToNext()){
-            Log.v("SQL", sb.toString());
-            Log.v("ReturnSubject", "  Sub : " + response.getString(response.getColumnIndex(I_X_EmailTemplate.COLUMNNAME_EmailSubject)));
-            Log.v("ReturnBody", "  Sub : " + response.getString(response.getColumnIndex(I_X_EmailTemplate.COLUMNNAME_EmailBody)));
             emailSubject.setText(response.getString(response.getColumnIndex(I_X_EmailTemplate.COLUMNNAME_EmailSubject)));
             emailBody.setText(response.getString(response.getColumnIndex(I_X_EmailTemplate.COLUMNNAME_EmailBody)));
         }
@@ -132,18 +129,15 @@ public class EmailCustomer extends AppCompatActivity implements View.OnClickList
         }
         catch (Exception e){
             Toast.makeText(getBaseContext(), "Email feature is only supported on physical device", Toast.LENGTH_LONG).show();
-            Log.e("EmailOnEmulator", "Email does not work on emulator");
         }
     }
 
     private void addEmail(){
         if ("".equals(emailAddr.getText())){
-            Log.v("EmailAddr", "EmaiLAddr Is Null");
             Toast.makeText(getBaseContext(), "Cannot add null email", Toast.LENGTH_LONG).show();
             return;
         }
         else if (!emailAddr.getText().toString().contains("@")){
-            Log.v("EmailAddr", "Does not contain @ ");
             Toast.makeText(getBaseContext(), "Please enter valid email and add again", Toast.LENGTH_LONG).show();
             return;
         }
@@ -158,12 +152,10 @@ public class EmailCustomer extends AppCompatActivity implements View.OnClickList
                 found = true;
             }
         }
-        Log.v("EmailAddr", found + " Email found or not");
         if (!found){
             Toast.makeText(this.getApplicationContext(), "Beware : This contact is not in your address book ", Toast.LENGTH_LONG);
             email = emailAddr.getText().toString();
         }
-        Log.v("FinalEmail", email);
     }
 
 }

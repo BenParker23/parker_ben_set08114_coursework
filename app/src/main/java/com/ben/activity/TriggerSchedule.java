@@ -114,8 +114,6 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
         statusValue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.v("OnItemSelected - i / l", String.valueOf(i) + " " + String.valueOf(l));
-                Log.v("ItemSelectedSpinner", adapterView.getItemAtPosition(i) + " has been selected");
                 statusValue.setSelection(i);
             }
             @Override
@@ -179,7 +177,6 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             action.setX_Action_Purpose_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_X_Action_Purpose_ID)));
             action.setX_Action_Status_ID(response.getInt(response.getColumnIndex(I_X_Trigger.COLUMNNAME_X_Action_Status_ID)));
             action.setResult(response.getString(response.getColumnIndex(I_X_Trigger.COLUMNNAME_Result)));
-            Log.v("SalesValueReturned : ", " SV - " + response.getDouble(response.getColumnIndex(I_X_C_BPartner.COLUMNNAME_SalesValue)));
             bpartner.setSalesValue(response.getDouble(response.getColumnIndex(I_X_C_BPartner.COLUMNNAME_SalesValue)));
             bpartner.setValue(response.getString(response.getColumnIndex(I_X_C_BPartner.COLUMNNAME_Value)));
             bpartner.setGrossProfit(response.getDouble(response.getColumnIndex(I_X_C_BPartner.COLUMNNAME_GrossProfit)));
@@ -197,7 +194,6 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
             valueTV.setTextColor(Color.WHITE);
             valueTV.setLayoutParams(createParams(400, 100, 0));
             valueTV.setOnClickListener(this);
-            //valueTV.set(createBorder());
             marginCounter = marginCounter + DisplayUtils.getDPFromPixels(getResources(), 110);
             listCoorLay.addView(valueTV);
         }
@@ -308,7 +304,6 @@ public class TriggerSchedule extends AppCompatActivity implements View.OnClickLi
         statusValue.post(new Runnable() {
             @Override
             public void run() {
-                Log.v("AddingDefaultSelection", String.valueOf(t.getX_Action_Status_ID()));
                 statusValue.setSelection(t.getX_Action_Status_ID());
             }
         });

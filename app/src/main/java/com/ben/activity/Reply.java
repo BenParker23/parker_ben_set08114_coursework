@@ -68,7 +68,6 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
             }
         }
         else if (view.getId() == R.id.submitBut){
-            Log.v("SubmitButtonPress", "PRessed");
             try {
                 X_SalesChatter salesRecord = new X_SalesChatter();
                 /** This should be set as current user **/
@@ -103,9 +102,7 @@ public class Reply extends AppCompatActivity implements View.OnClickListener{
                 Intent intent = new Intent(this.getBaseContext(), SalesChatter.class);
                 startActivity(intent);
             }
-            catch (Exception e){
-                Log.e("SavingSalesChatter", e.getLocalizedMessage());
-            }
+            catch (Exception e){}
 
         }
     }

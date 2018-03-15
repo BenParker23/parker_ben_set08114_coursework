@@ -66,7 +66,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         try {
             bpartner.save();
         } catch (Exception e){
-            Log.e("BPartnerSave", e.getLocalizedMessage());
+
         }
         newUser.setC_Bpartner_ID(bpartner.getC_BPartner_ID());
         newUser.setUsername(user.getText().toString());
@@ -77,7 +77,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
             newUser.save();
         }
         catch (Exception e){
-            Log.v("UserSaveError", e.getLocalizedMessage());
             Toast.makeText(getBaseContext(), "User already exists ", Toast.LENGTH_SHORT);
         };
 

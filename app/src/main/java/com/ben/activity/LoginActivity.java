@@ -55,8 +55,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(getBaseContext(), "Password cannot be null", Toast.LENGTH_LONG).show();
         }
         /** Get the user ID if it exists **/
-        Log.v("Username", username.getText().toString());
-        Log.v("Password", password.getText().toString());
         int userID = X_Login_Detail.validate(username.getText().toString(), password.getText().toString());
 
         /** Display error if user is not recognised **/
